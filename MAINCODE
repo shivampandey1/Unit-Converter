@@ -1,0 +1,134 @@
+//Name: Shivam
+//Date: July 20th 2017
+//Purpose: Help user convert between units
+//Description: takes user input on conversion they want, converts their value into the format of their choosing
+package unitconverter;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.text.NumberFormat;
+import javax.swing.JFrame;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
+//importing libraries
+
+public class Unitconverter extends JFrame implements ActionListener{
+JLabel title, choiceLbl, option1Lbl, option2Lbl, option3Lbl, option4Lbl, valueLbl, statementLbl;
+JTextField choiceField, valueField;
+JButton enterbtn;
+Container frame;
+//declare all variables
+
+public Unitconverter () {
+//gui design
+    
+    super ("Converter Application"); //title @ top
+    
+    frame = getContentPane (); //actualbox
+    frame.setLayout(null);//default layout
+    
+    title = new JLabel ("Unit Converter");
+    choiceLbl = new JLabel ("Enter conversion choice (1-4): ");
+    option1Lbl = new JLabel (" #1: Inches to Centimeters");
+    option2Lbl = new JLabel (" #2: Feet to Centimeters");
+    option3Lbl = new JLabel (" #3: Yards to Meters");
+    option4Lbl = new JLabel (" #4: Miles to Kilometers");
+    valueLbl = new JLabel ("Enter value to be converted: ");
+    statementLbl = new JLabel (" ");
+    //declare all JLabels
+    
+    choiceField = new JTextField ();
+    valueField = new JTextField ();
+    //declare all text fields
+    
+    enterbtn = new JButton ("Convert");
+    enterbtn.addActionListener(this);
+    //declare buttons
+    
+    
+    title.setBounds (10,0, 360,50);
+    choiceLbl.setBounds (10,185, 400, 50);
+    option1Lbl.setBounds (10,25,400,50);
+    option2Lbl.setBounds (10,65,400,50);
+    option3Lbl.setBounds (10,105, 400, 50);
+    option4Lbl.setBounds (10, 145, 400, 50);
+    choiceField.setBounds (10,225, 400, 50);
+    valueLbl.setBounds (10, 285, 400, 50);
+    valueField.setBounds (10, 325, 400, 50);
+    enterbtn.setBounds (10, 395, 400, 50);
+    statementLbl.setBounds (10, 445, 400, 50);
+    
+    //set sizes and position for all components
+    
+    frame.add(title);
+    frame.add (choiceLbl);
+    frame.add (option1Lbl);
+    frame.add (option2Lbl);
+    frame.add (option3Lbl);
+    frame.add (option4Lbl);
+    frame.add(choiceField);
+    frame.add(valueLbl);
+    frame.add(valueField);
+    frame.add(enterbtn);
+    frame.add(statementLbl);
+    //placed all components on frame
+    
+    setSize(450,550);//sets size of frame
+    setVisible(true);//sets it to be visible
+    setDefaultCloseOperation (EXIT_ON_CLOSE);//ends the process
+}
+
+
+@Override
+public void actionPerformed (ActionEvent evt){
+    if (evt.getSource () == enterbtn)
+//explains what to do if button pressed
+    {
+     String choiceStr, valueStr;
+     double choiceDbl, valueDbl, convertedDbl;
+     NumberFormat decimals = NumberFormat.getInstance ();
+        decimals.setMaximumFractionDigits(2);//limits decimal place of answers
+     
+     choiceStr = choiceField.getText();
+     valueStr = valueField.getText();
+     choiceDbl = Double.parseDouble(choiceStr);
+     valueDbl = Double.parseDouble(valueStr);//parses string from text field to double
+     
+     if (choiceDbl == 1)
+     {
+     convertedDbl = valueDbl * 2.54;//caluculaton
+     statementLbl.setText(valueDbl + " Inches = " + decimals.format(convertedDbl) +" Centimeters");//shows conversoin
+     }
+     else if (choiceDbl == 2)
+     {
+     convertedDbl = valueDbl * 30;
+     statementLbl.setText(valueDbl + " Feet = " + decimals.format(convertedDbl) + " Centimeters");
+     }
+     else if (choiceDbl == 3)
+     {
+     convertedDbl = valueDbl *0.91;
+     statementLbl.setText (valueDbl + " Yards = " + decimals.format(convertedDbl) + " Meters");
+     }
+     else if (choiceDbl == 4)
+     {
+     convertedDbl = valueDbl * 1.6;
+     statementLbl.setText (valueDbl + " Miles = " + decimals.format(convertedDbl) + " Meters");
+     }
+     else 
+     {
+     JOptionPane.showMessageDialog(null, "Please enter a conversion choice between 1 and 4.");//prompts user to make a valid selection if they do not do so
+     }
+     //different responses based on entry recieved
+    }
+  
+    
+           
+}
+    public static void main(String[] args) {
+     
+    
+        Unitconverter launcher = new Unitconverter ();
+    }//launcher
+    
+}
+ 
